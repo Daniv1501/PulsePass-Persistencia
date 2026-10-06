@@ -1,3 +1,5 @@
+ESTUDIANTE : DANIEL VARELA  2024214048
+
 # PulsePass
 
 Capa de persistencia para PulsePass, una plataforma de eventos y venta de entradas (conciertos, festivales, conferencias, deportes). Es un caso de estudio académico armado a partir de un PRD real: venues que albergan eventos, artistas que participan en esos eventos, usuarios que se registran y compran tickets.
