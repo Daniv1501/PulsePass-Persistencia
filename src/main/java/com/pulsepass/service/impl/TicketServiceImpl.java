@@ -46,6 +46,11 @@ public class TicketServiceImpl implements TicketService {
     @Override
     @Transactional
     public TicketResponse purchase(PurchaseTicketRequest request) {
+        // El tipo de ticket es obligatorio: sin él no se puede calcular el precio
+        if (request.type() == null) {
+            throw new BusinessRuleException("Ticket type is required");
+        }
+
         // BR-TICKET-001: usuario debe existir
         User user = userRepository.findByEmailIgnoreCase(request.userEmail())
                 .orElseThrow(() -> new ResourceNotFoundException(
@@ -103,7 +108,12 @@ public class TicketServiceImpl implements TicketService {
         // Calcular precio (encapsulado en TicketPricingPolicy)
         BigDecimal price = TicketPricingPolicy.calculatePrice(request.type());
 
-        // Crear Ticket (BR-TICKET-009 cumplida por diseño: price nunca es negativo)
+        // BR-TICKET-009: nunca se permite price < 0 (defensa explícita además del diseño de la política)
+        if (price.signum() < 0) {
+            throw new BusinessRuleException("Ticket price cannot be negative: " + price);
+        }
+
+        // Crear Ticket
         String ticketCode = "TCK-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
 
         Ticket ticket = new Ticket(

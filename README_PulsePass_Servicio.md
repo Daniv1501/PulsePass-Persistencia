@@ -270,7 +270,18 @@ verify(ticketRepository, never()).save(any());
 
 El test del escenario "último ticket disponible → `SOLD_OUT`" usa además `ArgumentCaptor<Event>`, para capturar el objeto exacto que se pasó a `eventRepository.save(...)` e inspeccionar su estado (`getStatus()`) después de la llamada — necesario porque ahí no alcanza con verificar que se guardó algo, hay que confirmar *cómo* quedó.
 
-Tests cubiertos: `UserServiceImplTest` (4), `EventServiceImplTest` (8), `TicketServiceImplTest` (12) — los 24 mínimos que pide el PRD, más los de `VenueService` y `ArtistService` que no tenían mínimo explícito pero se armaron igual por consistencia.
+Tests cubiertos (todos unitarios, sin Spring ni Docker):
+
+- `EventServiceImplTest` — TEST-EVENT-001..008 del PRD más duplicado de código, edad mínima 0/negativa, fecha nula, publicación desde cada estado inválido, fecha pasada y venue inactivo al publicar, consultas, y los tests requeridos de `addArtist` (BR-EVENT-010/011, evento y artista inexistentes).
+- `UserServiceImplTest` — TEST-USER-001..004 más `active = true` + perfil creado, email case-insensitive y consultas por email/username.
+- `TicketServiceImplTest` — TEST-TICKET-001..012 más evento inexistente, `SOLD_OUT`/`FINISHED`, evento pasado, borde exacto de edad en la fecha del evento, sin fecha de nacimiento, precio calculado por el sistema, `SOLD_OUT` solo en el último ticket, consultas y cancelaciones/usos inválidos.
+- `VenueServiceImplTest` y `ArtistServiceImplTest` — BR-VENUE-001/002 y BR-ARTIST-001/002.
+- `TicketPricingPolicyTest` — la estrategia de precio (BR-TICKET-009: nunca negativo).
+- `MapperTest` — las implementaciones MapStruct generadas (secciones 33 y 34 del PRD).
+- `ServiceLayerRulesTest` — reglas de la Definition of Done por reflexión (sin entidades en contratos, DTOs `record`, constructor injection, `@Transactional` de lectura/escritura).
+- `PulsePassAcceptanceScenarioTest` — el escenario de aceptación AC-001..AC-011 de punta a punta con servicios y mappers reales y repositories mockeados en memoria.
+
+La matriz de trazabilidad, la Definition of Done y las respuestas a las preguntas de sustentación están en `docs/PulsePass_Sustentacion_y_Trazabilidad.md`.
 
 Corren con:
 

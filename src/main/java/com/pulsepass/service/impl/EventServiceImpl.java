@@ -62,7 +62,7 @@ public class EventServiceImpl implements EventService {
         }
 
         // BR-EVENT-004: fecha futura
-        if (!request.eventDate().isAfter(LocalDateTime.now())) {
+        if (request.eventDate() == null || !request.eventDate().isAfter(LocalDateTime.now())) {
             throw new BusinessRuleException(
                     "Event date must be in the future: " + request.eventDate());
         }
