@@ -2,7 +2,7 @@
 
 Capa de persistencia para PulsePass, una plataforma de eventos y venta de entradas (conciertos, festivales, conferencias, deportes). Es un caso de estudio académico armado a partir de un PRD real: venues que albergan eventos, artistas que participan en esos eventos, usuarios que se registran y compran tickets.
 
-Igual que en el laboratorio anterior, acá solo está la capa de datos: entidades JPA, migraciones Flyway, repositories con sus consultas, y pruebas de integración contra Postgres real con Testcontainers. No hay controllers, API REST, service ni frontend — el PRD lo deja explícito como fuera de alcance.
+El proyecto creció por fases: primero la capa de datos (entidades JPA, migraciones Flyway, repositories y pruebas de integración contra Postgres real con Testcontainers), después la capa Service (ver `README_PulsePass_Servicio.md`) y ahora la capa de Controladores REST (ver `README_PulsePass_Controladores.md`). Frontend y seguridad siguen fuera de alcance.
 
 ## Stack
 
@@ -154,3 +154,14 @@ long countByEventEventCodeAndStatus(@Param("eventCode") String eventCode, @Param
 ## Por qué JPQL en unas y Query Method en otras
 
 El criterio que usé fue: si el filtro es directo (una o dos condiciones sobre campos simples o una sola relación), Query Method. Si hay que cruzar una relación N:M, combinar varias asociaciones a la vez, o controlar explícitamente el `DISTINCT`, JPQL. `findByEventEventCodeAndStatus`, por ejemplo, técnicamente cruza una relación (`Ticket → Event`), pero sigue siendo un filtro de dos condiciones exactas sin riesgo de duplicados, así que ahí Query Method sigue siendo la opción más simple y legible. En cambio `findByArtistStageName` necesita `DISTINCT` sí o sí porque atraviesa el N:M, y eso Spring Data no te lo deja controlar en un nombre de método derivado.
+
+## Fase 3 — API REST
+
+La capa de Controladores expone los 20 métodos de los Services como endpoints REST bajo `/api` (`venues`, `events`, `artists`, `users`, `tickets`), con validación de requests por Bean Validation, un `GlobalExceptionHandler` con contrato de errores `ErrorResponse` y pruebas de contrato HTTP con `@WebMvcTest` + MockMvc.
+
+- Endpoints, validaciones, errores y cómo correr las pruebas: `README_PulsePass_Controladores.md`
+- Trazabilidad, Definition of Done y respuestas para el equipo: `docs/PulsePass_Controladores_Trazabilidad.md`
+
+```bash
+mvnw.cmd test -Dtest="*ControllerTest,ControllerLayerRulesTest"   # solo la capa web, sin Docker
+```
