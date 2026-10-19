@@ -1,4 +1,4 @@
-INTEGRANTES: _(completar nombres y códigos)_
+INTEGRANTES: Daniel Varela
 
 # PulsePass — Fase 4: Seguridad con Spring Security y JWT
 
@@ -186,6 +186,10 @@ Importa `docs/postman/PulsePass-Fase4.postman_collection.json`. La variable `bas
 6. Carpeta **D. Usuario desactivado** (su token aún vigente y su login dan 401).
 
 Los tokens duran 15 minutos; si tardas más entre B y C, repite B. El evento debe estar publicado antes de que Andrea compre, por eso en el escenario el ADMIN lo publica y le asocia a Solar Beat primero.
+
+## Fase 5: pruebas end-to-end manuales
+
+La colección de la demostración anterior es un recorrido rápido. Las pruebas E2E formales de la Fase 5 viven en [`tests/e2e/`](tests/e2e/README.md): 22/22 rutas, 131 peticiones **sin scripts**, base dedicada `pulsepass_e2e`, fixtures SQL, checklist de ejecución, bitácora y matriz de cobertura.
 
 ## Pruebas y comandos de verificación
 
