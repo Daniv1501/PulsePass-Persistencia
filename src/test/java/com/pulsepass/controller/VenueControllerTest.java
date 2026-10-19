@@ -17,6 +17,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import org.springframework.context.annotation.Import;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -27,6 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Solo se carga la capa web; VenueService es un mock.
  */
 @WebMvcTest(VenueController.class)
+@Import(ControllerTestSecurityConfig.class)
 class VenueControllerTest {
 
     @Autowired

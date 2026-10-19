@@ -32,6 +32,8 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
+import org.springframework.context.annotation.Import;
+import org.springframework.security.test.context.support.WithMockUser;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -45,6 +47,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * EventService y TicketService son mocks; no se ejecuta lógica de negocio real.
  */
 @WebMvcTest(EventController.class)
+@Import(ControllerTestSecurityConfig.class)
+@WithMockUser(roles = "ADMIN")
 class EventControllerTest {
 
     private static final LocalDateTime EVENT_DATE = LocalDateTime.of(2026, 12, 5, 20, 0);
