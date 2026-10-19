@@ -155,8 +155,13 @@ class PulsePassAcceptanceScenarioTest {
                             .count();
                 });
 
+        // Fase 4: el escenario de negocio se ejecuta como personal autorizado (STAFF/ADMIN);
+        // la seguridad por rol/propiedad se prueba en las suites de seguridad.
+        AuthorizationService authorizationService = mock(AuthorizationService.class);
+        when(authorizationService.isStaffOrAdmin()).thenReturn(true);
+
         eventService = new EventServiceImpl(eventRepository, venueRepository, artistRepository,
-                new EventMapperImpl());
+                new EventMapperImpl(), authorizationService);
         userService = new UserServiceImpl(userRepository, new UserMapperImpl());
         ticketService = new TicketServiceImpl(userRepository, eventRepository, ticketRepository,
                 new TicketMapperImpl());
@@ -182,7 +187,8 @@ class PulsePassAcceptanceScenarioTest {
 
     private void register(String username, String email, String firstName, LocalDate birthDate) {
         userService.register(new RegisterUserRequest(
-                username, email, firstName, "Test", "3000000000", "Santa Marta", birthDate));
+                username, email, firstName, "Test", "3000000000", "Santa Marta", birthDate,
+                "UnaFraseSeguraLarga2026!"));
     }
 
     private EventResponse createEvent() {
