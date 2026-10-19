@@ -24,6 +24,7 @@ import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import org.springframework.security.access.AccessDeniedException;
 
 /**
  * Único punto de traducción de excepciones a HTTP (PRD Controladores, secciones 14 y 15).
@@ -141,6 +142,14 @@ public class GlobalExceptionHandler {
         @ExceptionHandler(InvalidCredentialsException.class)
     public ResponseEntity<ErrorResponse> handleInvalidCredentials(InvalidCredentialsException ex) {
         return build(HttpStatus.UNAUTHORIZED, ex.getMessage(), Map.of());
+    }
+    
+    
+    // ---------------------------------------------------------------- seguridad (método)
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ErrorResponse> handleAccessDenied(AccessDeniedException ex) {
+        return build(HttpStatus.FORBIDDEN, "You do not have permission to perform this operation", Map.of());
     }
 
     // ---------- 500 Internal Server Error ----------
