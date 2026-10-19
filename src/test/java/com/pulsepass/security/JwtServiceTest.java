@@ -64,11 +64,6 @@ class JwtServiceTest {
         return builder.compact();
     }
 
-    private static String validToken() {
-        return token("42", ISSUER, NOW, NOW.plusSeconds(900),
-                UUID.randomUUID().toString(), KEY, Jwts.SIG.HS256);
-    }
-
     private void assertRejected(String token) {
         assertThatThrownBy(() -> service.validateAndExtractUserId(token))
                 .isInstanceOf(InvalidJwtException.class);

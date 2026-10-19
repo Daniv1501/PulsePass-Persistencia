@@ -69,7 +69,7 @@ class UserControllerTest {
 
     private UserResponse andrea() {
         return new UserResponse(1L, "andrea", "andrea@pulsepass.com", true, "Andrea", "Gómez",
-                "3001234567", "Santa Marta", LocalDate.of(1998, 4, 10), "UnaFraseSeguraLarga2026!");
+                "3001234567", "Santa Marta", LocalDate.of(1998, 4, 10));
     }
 
     // TEST-CTRL-USR-001 / AC-CTRL-007
@@ -211,7 +211,7 @@ class UserControllerTest {
 
     @Test
     void shouldReturn400WhenPasswordIsTooShort() throws Exception {
-        String json = VALID_REGISTER_JSON.replace("UnaFraseSeguraLarga2026!", "corta");
+        String json = VALID_BODY.replace("UnaFraseSeguraLarga2026!", "corta");
 
         mockMvc.perform(post("/api/users")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -224,7 +224,7 @@ class UserControllerTest {
 
     @Test
     void shouldReturn400WhenUsernameContainsAtSign() throws Exception {
-        String json = VALID_REGISTER_JSON.replace("\"username\": \"andrea\"", "\"username\": \"andrea@x\"");
+        String json = VALID_BODY.replace("\"username\": \"andrea\"", "\"username\": \"andrea@x\"");
 
         mockMvc.perform(post("/api/users")
                         .contentType(MediaType.APPLICATION_JSON)
