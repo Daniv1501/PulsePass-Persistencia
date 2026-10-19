@@ -23,7 +23,6 @@ import com.pulsepass.repository.EventRepository;
 import com.pulsepass.repository.TicketRepository;
 import com.pulsepass.repository.UserRepository;
 import com.pulsepass.repository.VenueRepository;
-import com.pulsepass.service.impl.ArtistServiceImpl;
 import com.pulsepass.service.impl.EventServiceImpl;
 import com.pulsepass.service.impl.TicketServiceImpl;
 import com.pulsepass.service.impl.UserServiceImpl;

@@ -74,7 +74,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HandlerMethodValidationException.class)
     public ResponseEntity<ErrorResponse> handleParameterValidation(HandlerMethodValidationException ex) {
         Map<String, String> details = new LinkedHashMap<>();
-        ex.getAllValidationResults().forEach(result -> {
+        ex.getParameterValidationResults().forEach(result -> {
             String key = parameterName(result.getMethodParameter());
             result.getResolvableErrors().stream()
                     .map(MessageSourceResolvable::getDefaultMessage)

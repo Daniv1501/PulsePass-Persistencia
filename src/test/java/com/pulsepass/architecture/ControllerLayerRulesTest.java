@@ -11,6 +11,7 @@ import com.pulsepass.exception.DuplicateResourceException;
 import com.pulsepass.exception.GlobalExceptionHandler;
 import com.pulsepass.exception.ResourceNotFoundException;
 import com.pulsepass.service.ArtistService;
+import com.pulsepass.service.AuthService;
 import com.pulsepass.service.EventService;
 import com.pulsepass.service.TicketService;
 import com.pulsepass.service.UserService;
@@ -62,6 +63,11 @@ class ControllerLayerRulesTest {
     private static final Set<Class<?>> SERVICES = Set.of(
             VenueService.class, EventService.class, ArtistService.class,
             UserService.class, TicketService.class);
+
+    // Fase 4: UserController delega el registro atómico en AuthService (PRD Seguridad §9.3).
+    private static final Set<Class<?>> ALLOWED_DEPENDENCIES = Set.of(
+            VenueService.class, EventService.class, ArtistService.class,
+            UserService.class, TicketService.class, AuthService.class);
 
     /**
      * Contrato HTTP de la sección 8: los 20 métodos de Service de la Fase 2 (sección 9)
@@ -116,7 +122,7 @@ class ControllerLayerRulesTest {
 
             assertThat(fields).as("%s has dependencies", controller.getSimpleName()).isNotEmpty();
             for (var field : fields) {
-                assertThat(SERVICES).as("%s.%s is a Service interface", controller.getSimpleName(), field.getName())
+                assertThat(ALLOWED_DEPENDENCIES).as("%s.%s is a Service", controller.getSimpleName(), field.getName())
                         .contains(field.getType());
                 assertThat(field.getType().getName()).doesNotContain(".repository.");
                 assertThat(Modifier.isFinal(field.getModifiers())).isTrue();
@@ -124,7 +130,7 @@ class ControllerLayerRulesTest {
             }
             assertThat(controller.getDeclaredConstructors()).hasSize(1);
             for (Class<?> parameterType : controller.getDeclaredConstructors()[0].getParameterTypes()) {
-                assertThat(SERVICES).contains(parameterType);
+                assertThat(ALLOWED_DEPENDENCIES).contains(parameterType);
             }
         }
     }

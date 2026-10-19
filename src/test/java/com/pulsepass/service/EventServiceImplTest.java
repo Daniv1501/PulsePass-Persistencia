@@ -200,7 +200,13 @@ class EventServiceImplTest {
         verify(eventRepository, never()).save(any());
     }
 
-    // ==============================================================                EventCategory.MUSIC, status, LocalDateTime.now().plusMonths(1), 18);
+    // =====================================================================
+    // Pruebas adicionales: reglas BR-EVENT-001..011 completas
+    // =====================================================================
+
+    private Event eventWithStatus(Venue venue, EventStatus status) {
+        Event event = new Event("CMF-2026", "Caribbean Music Fest", "Festival",
+                EventCategory.MUSIC, status, LocalDateTime.now().plusMonths(1), 18);
         venue.addEvent(event);
         return event;
     }
