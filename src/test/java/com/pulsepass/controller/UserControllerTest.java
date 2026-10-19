@@ -4,6 +4,7 @@ import com.pulsepass.dto.request.RegisterUserRequest;
 import com.pulsepass.dto.response.UserResponse;
 import com.pulsepass.exception.DuplicateResourceException;
 import com.pulsepass.exception.ResourceNotFoundException;
+import com.pulsepass.service.AuthService;
 import com.pulsepass.service.UserService;
 
 import org.junit.jupiter.api.Test;
@@ -43,7 +44,8 @@ class UserControllerTest {
               "lastName": "Gómez",
               "phone": "3001234567",
               "city": "Santa Marta",
-              "birthDate": "1998-04-10"
+              "birthDate": "1998-04-10",
+              "password": "UnaFraseSeguraLarga2026!"
             }
             """;
 
@@ -53,20 +55,23 @@ class UserControllerTest {
     @MockitoBean
     private UserService userService;
 
+    @MockitoBean
+    private AuthService authService;
+
     private RegisterUserRequest validRequest() {
         return new RegisterUserRequest("andrea", "andrea@pulsepass.com", "Andrea", "Gómez",
-                "3001234567", "Santa Marta", LocalDate.of(1998, 4, 10));
+                "3001234567", "Santa Marta", LocalDate.of(1998, 4, 10), "UnaFraseSeguraLarga2026!");
     }
 
     private UserResponse andrea() {
         return new UserResponse(1L, "andrea", "andrea@pulsepass.com", true, "Andrea", "Gómez",
-                "3001234567", "Santa Marta", LocalDate.of(1998, 4, 10));
+                "3001234567", "Santa Marta", LocalDate.of(1998, 4, 10), "UnaFraseSeguraLarga2026!");
     }
 
     // TEST-CTRL-USR-001 / AC-CTRL-007
     @Test
     void shouldReturn201WhenRegisteringValidUser() throws Exception {
-        when(userService.register(validRequest())).thenReturn(andrea());
+        when(authService.register(validRequest())).thenReturn(andrea());
 
         mockMvc.perform(post("/api/users").contentType(MediaType.APPLICATION_JSON).content(VALID_BODY))
                 .andExpect(status().isCreated())
@@ -78,7 +83,7 @@ class UserControllerTest {
                 .andExpect(jsonPath("$.active").value(true))
                 .andExpect(jsonPath("$.birthDate").value("1998-04-10"));
 
-        verify(userService).register(validRequest());
+        verify(authService).register(validRequest());
     }
 
     // TEST-CTRL-USR-002
@@ -94,7 +99,7 @@ class UserControllerTest {
                 .andExpect(jsonPath("$.message").value("Validation failed"))
                 .andExpect(jsonPath("$.details.email").value("Email must be a valid email address"));
 
-        verify(userService, never()).register(any());
+        verify(authService, never()).register(any());
     }
 
     @Test
@@ -107,13 +112,13 @@ class UserControllerTest {
                 .andExpect(jsonPath("$.details.lastName").value("Last name is required"))
                 .andExpect(jsonPath("$.details.birthDate").value("Birth date is required"));
 
-        verify(userService, never()).register(any());
+        verify(authService, never()).register(any());
     }
 
     // TEST-CTRL-USR-003
     @Test
     void shouldReturn409WhenUsernameIsDuplicated() throws Exception {
-        when(userService.register(validRequest()))
+        when(authService.register(validRequest()))
                 .thenThrow(new DuplicateResourceException("Username already exists: andrea"));
 
         mockMvc.perform(post("/api/users").contentType(MediaType.APPLICATION_JSON).content(VALID_BODY))
@@ -123,13 +128,13 @@ class UserControllerTest {
                 .andExpect(jsonPath("$.error").value("Conflict"))
                 .andExpect(jsonPath("$.message").value("Username already exists: andrea"));
 
-        verify(userService).register(validRequest());
+        verify(authService).register(validRequest());
     }
 
     // AC-CTRL-008: email duplicado → 409 sin exponer detalles internos
     @Test
     void shouldReturn409WithoutInternalDetailsWhenEmailIsDuplicated() throws Exception {
-        when(userService.register(validRequest()))
+        when(authService.register(validRequest()))
                 .thenThrow(new DuplicateResourceException("Email already exists: andrea@pulsepass.com"));
 
         mockMvc.perform(post("/api/users").contentType(MediaType.APPLICATION_JSON).content(VALID_BODY))
