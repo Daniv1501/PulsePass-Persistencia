@@ -23,6 +23,7 @@ import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.List;
 import java.util.UUID;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 @Service
 @Transactional(readOnly = true)
@@ -45,6 +46,7 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     @Transactional
+    @PreAuthorize("@authorizationService.canPurchaseFor(#request.userEmail())")
     public TicketResponse purchase(PurchaseTicketRequest request) {
         // El tipo de ticket es obligatorio: sin él no se puede calcular el precio
         if (request.type() == null) {
@@ -138,6 +140,7 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
+    @PreAuthorize("@authorizationService.canViewTicket(#ticketCode)")
     public TicketResponse findByCode(String ticketCode) {
         return ticketRepository.findByTicketCode(ticketCode)
                 .map(mapper::toResponse)
@@ -146,6 +149,7 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
+    @PreAuthorize("@authorizationService.canListTicketsOf(#email)")
     public List<TicketResponse> findByUserEmail(String email) {
         return ticketRepository.findByUserEmailIgnoreCaseOrderByPurchaseDateDesc(email)
                 .stream()
@@ -154,6 +158,7 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
+    @PreAuthorize("hasAnyRole('STAFF', 'ADMIN')")
     public List<TicketResponse> findPaidTicketsByEvent(String eventCode) {
         return ticketRepository.findByEventEventCodeAndStatus(eventCode, TicketStatus.PAID)
                 .stream()
@@ -163,6 +168,7 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     @Transactional
+    @PreAuthorize("@authorizationService.canCancelTicket(#ticketCode)")
     public TicketResponse cancel(String ticketCode) {
         Ticket ticket = ticketRepository.findByTicketCode(ticketCode)
                 .orElseThrow(() -> new ResourceNotFoundException(
@@ -188,6 +194,7 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     @Transactional
+    @PreAuthorize("hasAnyRole('STAFF', 'ADMIN')")
     public TicketResponse markAsUsed(String ticketCode) {
         Ticket ticket = ticketRepository.findByTicketCode(ticketCode)
                 .orElseThrow(() -> new ResourceNotFoundException(
