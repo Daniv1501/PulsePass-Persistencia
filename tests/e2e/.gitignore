@@ -1,0 +1,16 @@
+# Ambientes de Postman exportados con valores reales (tokens, contraseñas).
+# El único ambiente versionado es la plantilla postman/PulsePass-local.postman_environment.json.
+*.postman_environment.json
+!postman/PulsePass-local.postman_environment.json
+*.postman_globals.json
+
+# Evidencias y capturas locales (pueden mostrar tokens o datos personales)
+evidencias/
+capturas/
+*.png
+*.jpg
+*.har
+
+# Variables de entorno locales del ambiente E2E
+.env
+.env.*
