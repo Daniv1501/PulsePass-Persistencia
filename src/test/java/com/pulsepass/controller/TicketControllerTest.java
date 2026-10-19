@@ -29,6 +29,8 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import org.springframework.context.annotation.Import;
+import org.springframework.security.test.context.support.WithMockUser;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -44,6 +46,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * GET /api/events/{eventCode}/tickets/paid bajo el recurso evento; ambos Services son mocks.
  */
 @WebMvcTest({TicketController.class, EventController.class})
+@Import(ControllerTestSecurityConfig.class)
+@WithMockUser(roles = {"USER", "STAFF"})
 class TicketControllerTest {
 
     private static final String VALID_BODY = """
