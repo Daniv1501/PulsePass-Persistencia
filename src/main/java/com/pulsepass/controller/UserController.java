@@ -2,6 +2,7 @@ package com.pulsepass.controller;
 
 import com.pulsepass.dto.request.RegisterUserRequest;
 import com.pulsepass.dto.response.UserResponse;
+import com.pulsepass.service.AuthService;
 import com.pulsepass.service.UserService;
 
 import jakarta.validation.Valid;
@@ -33,15 +34,17 @@ import java.net.URI;
 public class UserController {
 
     private final UserService userService;
+    private final AuthService authService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, AuthService authService) {
         this.userService = userService;
+        this.authService = authService;
     }
 
-    // FR-CTRL-USR-001
+    // FR-CTRL-USR-001 (registro atómico: usuario + credencial BCrypt + ROLE_USER)
     @PostMapping
     public ResponseEntity<UserResponse> register(@Valid @RequestBody RegisterUserRequest request) {
-        UserResponse created = userService.register(request);
+        UserResponse created = authService.register(request);
         URI location = UriComponentsBuilder.fromPath("/api/users/by-username")
                 .queryParam("username", created.username())
                 .encode()
