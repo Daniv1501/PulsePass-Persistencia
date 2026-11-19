@@ -1,0 +1,18 @@
+services:
+  postgres-e2e:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_DB: pulsepass_e2e
+      POSTGRES_USER: pulsepass
+      POSTGRES_PASSWORD: ${PULSEPASS_E2E_DB_PASSWORD:?Define una contraseña de base E2E}
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - pulsepass_e2e_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pulsepass -d pulsepass_e2e"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+volumes:
+  pulsepass_e2e_data:

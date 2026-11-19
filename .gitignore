@@ -31,3 +31,11 @@ build/
 
 ### VS Code ###
 .vscode/
+/.pdf-tools/
+/frontend/node_modules/
+/frontend/dist/
+/frontend/coverage/
+/frontend/.env
+/frontend/*.tsbuildinfo
+/.env
+/tests/e2e/postman/*private*

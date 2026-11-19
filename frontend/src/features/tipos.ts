@@ -1,0 +1,7 @@
+export * from './eventos/tipos'
+export * from './tickets/tipos'
+export * from './auth/tipos'
+export * from './sedes/tipos'
+export * from './artistas/tipos'
+export * from './usuarios/tipos'
+export * from './comun/tipos'

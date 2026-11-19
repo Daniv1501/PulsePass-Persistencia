@@ -1,0 +1,16 @@
+package com.pulsepass.security;
+
+import org.springframework.data.jpa.repository.EntityGraph;
+import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Optional;
+
+public interface UserCredentialRepository extends JpaRepository<UserCredential, Long> {
+    @EntityGraph(attributePaths = {"user", "roles"})
+    Optional<UserCredential> findByUserId(Long userId);
+
+    @EntityGraph(attributePaths = {"user", "roles"})
+    Optional<UserCredential> findByUserUsername(String username);
+
+    @EntityGraph(attributePaths = {"user", "roles"})
+    Optional<UserCredential> findByUserEmailIgnoreCase(String email);
+}

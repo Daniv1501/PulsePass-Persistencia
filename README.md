@@ -1,5 +1,7 @@
 # PulsePass
 
+La continuación completa está en [la guía del backend](README_BACKEND.md), [el frontend](frontend/README.md) y [las pruebas manuales Postman](tests/e2e/README.md). Incluye REST, JWT, roles, propiedad y fixtures E2E. Las secciones originales que siguen describen la fase de persistencia y su alcance histórico.
+
 Capa de persistencia para PulsePass, una plataforma de eventos y venta de entradas (conciertos, festivales, conferencias, deportes). Es un caso de estudio académico armado a partir de un PRD real: venues que albergan eventos, artistas que participan en esos eventos, usuarios que se registran y compran tickets.
 
 Igual que en el laboratorio anterior, acá solo está la capa de datos: entidades JPA, migraciones Flyway, repositories con sus consultas, y pruebas de integración contra Postgres real con Testcontainers. No hay controllers, API REST, service ni frontend — el PRD lo deja explícito como fuera de alcance.
