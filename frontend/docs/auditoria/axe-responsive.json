@@ -1,0 +1,841 @@
+{
+  "date": "2026-11-17T04:13:19.186Z",
+  "source": "UI con fixtures, Chrome CDP, axe-core WCAG2 A/AA y WCAG2.1 AA",
+  "browser": {
+    "protocolVersion": "1.3",
+    "product": "Chrome/157.0.8103.51",
+    "revision": "@653674df293788cf4932c40d914e9e15b41a2d31",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36",
+    "jsVersion": "15.7.112.23"
+  },
+  "results": [
+    {
+      "requestedPath": "/",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/eventos",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/eventos",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/eventos",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/eventos",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/eventos/CMF-2026",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/eventos/CMF-2026",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/eventos/CMF-2026",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/eventos/CMF-2026",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/artistas",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/artistas",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/artistas",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/artistas",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/artistas/1",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/artistas/1",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/artistas/1",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/artistas/1",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/sedes",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/sedes",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/sedes",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/sedes",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/sedes/VEN-SMR-01",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/sedes/VEN-SMR-01",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/sedes/VEN-SMR-01",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/sedes/VEN-SMR-01",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/cuenta",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/cuenta",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/cuenta",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/cuenta",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/mis-tickets",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/mis-tickets",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/mis-tickets",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/mis-tickets",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/mis-tickets/TKT-8F2A1C",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/mis-tickets/TKT-8F2A1C",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/mis-tickets/TKT-8F2A1C",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/mis-tickets/TKT-8F2A1C",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/compra/confirmacion/TKT-8F2A1C",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/compra/confirmacion/TKT-8F2A1C",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/compra/confirmacion/TKT-8F2A1C",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/compra/confirmacion/TKT-8F2A1C",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/staff/validacion",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/staff/validacion",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/staff/validacion",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/staff/validacion",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/staff/eventos/CMF-2026/tickets",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/staff/eventos/CMF-2026/tickets",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/staff/eventos/CMF-2026/tickets",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/staff/eventos/CMF-2026/tickets",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/admin/eventos",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/admin/eventos",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/admin/eventos",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/admin/eventos",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/admin/eventos/nuevo",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/admin/eventos/nuevo",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/admin/eventos/nuevo",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/admin/eventos/nuevo",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/admin/eventos/nuevo",
+      "state": "invalido",
+      "theme": "light",
+      "url": "/admin/eventos/nuevo",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/admin/eventos/nuevo",
+      "state": "invalido",
+      "theme": "dark",
+      "url": "/admin/eventos/nuevo",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/admin/eventos/DRAFT",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/admin/eventos/DRAFT",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/admin/eventos/DRAFT",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/admin/eventos/DRAFT",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/403",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/403",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/403",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/403",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/ruta-inexistente",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/ruta-inexistente",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/ruta-inexistente",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/ruta-inexistente",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/login",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/login",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/login",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/login",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/login",
+      "state": "invalido",
+      "theme": "light",
+      "url": "/login",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/login",
+      "state": "invalido",
+      "theme": "dark",
+      "url": "/login",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/registro",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/registro",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/registro",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/registro",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/registro",
+      "state": "invalido",
+      "theme": "light",
+      "url": "/registro",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/registro",
+      "state": "invalido",
+      "theme": "dark",
+      "url": "/registro",
+      "width": 360,
+      "pageWidth": 360,
+      "violations": []
+    },
+    {
+      "requestedPath": "/",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/eventos",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/eventos",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/eventos",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/eventos",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/eventos/CMF-2026",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/eventos/CMF-2026",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/eventos/CMF-2026",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/eventos/CMF-2026",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/artistas",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/artistas",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/artistas",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/artistas",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/artistas/1",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/artistas/1",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/artistas/1",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/artistas/1",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/sedes",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/sedes",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/sedes",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/sedes",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/sedes/VEN-SMR-01",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/sedes/VEN-SMR-01",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/sedes/VEN-SMR-01",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/sedes/VEN-SMR-01",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/cuenta",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/cuenta",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/cuenta",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/cuenta",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/mis-tickets",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/mis-tickets",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/mis-tickets",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/mis-tickets",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/mis-tickets/TKT-8F2A1C",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/mis-tickets/TKT-8F2A1C",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/mis-tickets/TKT-8F2A1C",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/mis-tickets/TKT-8F2A1C",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/compra/confirmacion/TKT-8F2A1C",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/compra/confirmacion/TKT-8F2A1C",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/compra/confirmacion/TKT-8F2A1C",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/compra/confirmacion/TKT-8F2A1C",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/staff/validacion",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/staff/validacion",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/staff/validacion",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/staff/validacion",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/staff/eventos/CMF-2026/tickets",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/staff/eventos/CMF-2026/tickets",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/staff/eventos/CMF-2026/tickets",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/staff/eventos/CMF-2026/tickets",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/admin/eventos",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/admin/eventos",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/admin/eventos",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/admin/eventos",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/admin/eventos/nuevo",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/admin/eventos/nuevo",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/admin/eventos/nuevo",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/admin/eventos/nuevo",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/admin/eventos/nuevo",
+      "state": "invalido",
+      "theme": "light",
+      "url": "/admin/eventos/nuevo",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/admin/eventos/nuevo",
+      "state": "invalido",
+      "theme": "dark",
+      "url": "/admin/eventos/nuevo",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/admin/eventos/DRAFT",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/admin/eventos/DRAFT",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/admin/eventos/DRAFT",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/admin/eventos/DRAFT",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/403",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/403",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/403",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/403",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/ruta-inexistente",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/ruta-inexistente",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/ruta-inexistente",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/ruta-inexistente",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/login",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/login",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/login",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/login",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/login",
+      "state": "invalido",
+      "theme": "light",
+      "url": "/login",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/login",
+      "state": "invalido",
+      "theme": "dark",
+      "url": "/login",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/registro",
+      "state": "inicial",
+      "theme": "light",
+      "url": "/registro",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/registro",
+      "state": "inicial",
+      "theme": "dark",
+      "url": "/registro",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/registro",
+      "state": "invalido",
+      "theme": "light",
+      "url": "/registro",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    },
+    {
+      "requestedPath": "/registro",
+      "state": "invalido",
+      "theme": "dark",
+      "url": "/registro",
+      "width": 1440,
+      "pageWidth": 1440,
+      "violations": []
+    }
+  ]
+}

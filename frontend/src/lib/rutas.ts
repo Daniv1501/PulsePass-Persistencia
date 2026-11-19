@@ -1,0 +1,33 @@
+const segment = encodeURIComponent
+export const PATRONES = {
+  evento: '/eventos/:eventCode',
+  artista: '/artistas/:id',
+  sede: '/sedes/:code',
+  ticket: '/mis-tickets/:ticketCode',
+  confirmacion: '/compra/confirmacion/:ticketCode',
+  pagados: '/staff/eventos/:eventCode/tickets',
+  gestion: '/admin/eventos/:eventCode',
+  noEncontrada: '*',
+} as const
+export const RUTAS = {
+  inicio: '/',
+  eventos: '/eventos',
+  evento: (c: string) => `/eventos/${segment(c)}`,
+  artistas: '/artistas',
+  artista: (id: number) => `/artistas/${id}`,
+  sedes: '/sedes',
+  sede: (c: string) => `/sedes/${segment(c)}`,
+  login: '/login',
+  registro: '/registro',
+  cuenta: '/cuenta',
+  tickets: '/mis-tickets',
+  ticket: (c: string) => `/mis-tickets/${segment(c)}`,
+  confirmacion: (c: string) => `/compra/confirmacion/${segment(c)}`,
+  validacion: '/staff/validacion',
+  consultaPagados: '/staff/validacion#tickets-pagados',
+  pagados: (c: string) => `/staff/eventos/${segment(c)}/tickets`,
+  admin: '/admin/eventos',
+  crear: '/admin/eventos/nuevo',
+  gestion: (c: string) => `/admin/eventos/${segment(c)}`,
+  sinPermisos: '/403',
+} as const

@@ -1,0 +1,3594 @@
+{
+  "info": {
+    "name": "PulsePass - E2E Manual",
+    "description": "22 rutas reales. Exclusivamente Send individual y revision visual; sin scripts, Runner, Newman ni Postman CLI. Importar ambiente sin secretos y completar variables locales. Ver tests/e2e/README.md.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "00 Preparacion / conectividad",
+      "item": [
+        {
+          "name": "PRE-001 | Comprobar API con una ruta publica existente",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/venues/active",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "venues",
+                "active"
+              ]
+            },
+            "description": "ID: PRE-001\nObjetivo: Comprobar API con una ruta publica existente\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nNo usar /health: no forma parte del contrato.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "01 Venues (2 rutas)",
+      "item": [
+        {
+          "name": "E2E-VEN-01 | Consultar sede activa por codigo",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/venues/{{venueActiveCode}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "venues",
+                "{{venueActiveCode}}"
+              ]
+            },
+            "description": "ID: E2E-VEN-01\nObjetivo: Consultar sede activa por codigo\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nVerificar code, name, city, address, capacity y active=true.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E2E-VEN-02 | Listar sedes activas",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/venues/active",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "venues",
+                "active"
+              ]
+            },
+            "description": "ID: E2E-VEN-02\nObjetivo: Listar sedes activas\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nCopiar code a venueActiveCode. No deben aparecer sedes inactivas.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "02 Artists (3 rutas)",
+      "item": [
+        {
+          "name": "E2E-ART-01 | Consultar artista por ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/artists/{{artistId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "artists",
+                "{{artistId}}"
+              ]
+            },
+            "description": "ID: E2E-ART-01\nObjetivo: Consultar artista por ID\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E2E-ART-02 | Consultar por nombre artistico",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/artists/by-stage-name?stageName={{artistStageName}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "artists",
+                "by-stage-name"
+              ],
+              "query": [
+                {
+                  "key": "stageName",
+                  "value": "{{artistStageName}}"
+                }
+              ]
+            },
+            "description": "ID: E2E-ART-02\nObjetivo: Consultar por nombre artistico\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E2E-ART-03 | Listar artistas activos",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/artists/active",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "artists",
+                "active"
+              ]
+            },
+            "description": "ID: E2E-ART-03\nObjetivo: Listar artistas activos\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nCopiar id y stageName de Solar Beat a artistId y artistStageName.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "03 Auth / usuarios (registro, login, me)",
+      "item": [
+        {
+          "name": "TC-AUTH-001A | Registrar USER_A",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users"
+              ]
+            },
+            "description": "ID: TC-AUTH-001A\nObjetivo: Registrar USER_A\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 201\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nUsar username/email unicos. No devuelve JWT ni password. El rol efectivo debe ser USER al consultar /me.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{userAUsername}}\",\n  \"email\": \"{{userAEmail}}\",\n  \"firstName\": \"Andrea\",\n  \"lastName\": \"Pruebas\",\n  \"birthDate\": \"1998-05-15\",\n  \"password\": \"{{userAPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-AUTH-001B | Registrar USER_B",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users"
+              ]
+            },
+            "description": "ID: TC-AUTH-001B\nObjetivo: Registrar USER_B\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 201\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nUsar username/email unicos. No devuelve JWT ni password. El rol efectivo debe ser USER al consultar /me.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{userBUsername}}\",\n  \"email\": \"{{userBEmail}}\",\n  \"firstName\": \"Carlos\",\n  \"lastName\": \"Pruebas\",\n  \"birthDate\": \"1998-05-15\",\n  \"password\": \"{{userBPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-AUTH-002-userA | Login userA",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "ID: TC-AUTH-002-userA\nObjetivo: Login userA\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nCopiar accessToken MANUALMENTE a userAToken, solo valor local. tokenType=Bearer; expiresIn=900 (o el TTL configurado). No Set-Cookie de autenticacion.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifier\": \"{{userAUsername}}\",\n  \"password\": \"{{userAPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-AUTH-006-userA | Verificar identidad y roles userA",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "me"
+              ]
+            },
+            "description": "ID: TC-AUTH-006-userA\nObjetivo: Verificar identidad y roles userA\nActor: userA\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nComprobar userId, username, email y roles efectivos. No contiene password, passwordHash ni token.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userAToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-AUTH-002-userB | Login userB",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "ID: TC-AUTH-002-userB\nObjetivo: Login userB\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nCopiar accessToken MANUALMENTE a userBToken, solo valor local. tokenType=Bearer; expiresIn=900 (o el TTL configurado). No Set-Cookie de autenticacion.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifier\": \"{{userBUsername}}\",\n  \"password\": \"{{userBPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-AUTH-006-userB | Verificar identidad y roles userB",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "me"
+              ]
+            },
+            "description": "ID: TC-AUTH-006-userB\nObjetivo: Verificar identidad y roles userB\nActor: userB\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nComprobar userId, username, email y roles efectivos. No contiene password, passwordHash ni token.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userBToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-AUTH-002-staff | Login staff",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "ID: TC-AUTH-002-staff\nObjetivo: Login staff\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nCopiar accessToken MANUALMENTE a staffToken, solo valor local. tokenType=Bearer; expiresIn=900 (o el TTL configurado). No Set-Cookie de autenticacion.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifier\": \"{{staffIdentifier}}\",\n  \"password\": \"{{staffPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-AUTH-006-staff | Verificar identidad y roles staff",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "me"
+              ]
+            },
+            "description": "ID: TC-AUTH-006-staff\nObjetivo: Verificar identidad y roles staff\nActor: staff\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nComprobar userId, username, email y roles efectivos. No contiene password, passwordHash ni token.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{staffToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-AUTH-002-admin | Login admin",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "ID: TC-AUTH-002-admin\nObjetivo: Login admin\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nCopiar accessToken MANUALMENTE a adminToken, solo valor local. tokenType=Bearer; expiresIn=900 (o el TTL configurado). No Set-Cookie de autenticacion.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifier\": \"{{adminIdentifier}}\",\n  \"password\": \"{{adminPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-AUTH-006-admin | Verificar identidad y roles admin",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "me"
+              ]
+            },
+            "description": "ID: TC-AUTH-006-admin\nObjetivo: Verificar identidad y roles admin\nActor: admin\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nComprobar userId, username, email y roles efectivos. No contiene password, passwordHash ni token.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-AUTH-003 | Login por email",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "ID: TC-AUTH-003\nObjetivo: Login por email\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifier\": \"{{userAEmail}}\",\n  \"password\": \"{{userAPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "04 Usuarios / consulta y propiedad (2 rutas)",
+      "item": [
+        {
+          "name": "E2E-USR-02 | Consultar propio usuario por email",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/by-email?email={{userAEmail}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "by-email"
+              ],
+              "query": [
+                {
+                  "key": "email",
+                  "value": "{{userAEmail}}"
+                }
+              ]
+            },
+            "description": "ID: E2E-USR-02\nObjetivo: Consultar propio usuario por email\nActor: userA\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userAToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E2E-USR-03 | Consultar propio usuario por username",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/by-username?username={{userAUsername}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "by-username"
+              ],
+              "query": [
+                {
+                  "key": "username",
+                  "value": "{{userAUsername}}"
+                }
+              ]
+            },
+            "description": "ID: E2E-USR-03\nObjetivo: Consultar propio usuario por username\nActor: userA\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userAToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "05 Events / administracion y visibilidad (6 rutas)",
+      "item": [
+        {
+          "name": "E2E-EVT-01 | Crear borrador ADMIN",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/events",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "events"
+              ]
+            },
+            "description": "ID: E2E-EVT-01\nObjetivo: Crear borrador ADMIN\nActor: admin\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 201\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nGuardar eventCode en eventToPublishCode. Debe iniciar DRAFT. Elegir newEventCode unico antes de Send.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventCode\": \"{{newEventCode}}\",\n  \"name\": \"PulsePass E2E {{runId}}\",\n  \"description\": \"Evento de prueba manual\",\n  \"category\": \"MUSIC\",\n  \"eventDate\": \"{{futureEventDate}}\",\n  \"minimumAge\": 0,\n  \"venueCode\": \"{{venueActiveCode}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E2E-EVT-02 | Leer borrador ADMIN",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/events/{{eventToPublishCode}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "events",
+                "{{eventToPublishCode}}"
+              ]
+            },
+            "description": "ID: E2E-EVT-02\nObjetivo: Leer borrador ADMIN\nActor: admin\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nDebe ser DRAFT antes de publicar; luego PUBLISHED.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E2E-EVT-03 | Cartelera publica",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/events/published",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "events",
+                "published"
+              ]
+            },
+            "description": "ID: E2E-EVT-03\nObjetivo: Cartelera publica\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nNo debe incluir draftEventCode. Tras publicar, debe incluir eventToPublishCode.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E2E-EVT-04 | Publicar evento ADMIN",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/events/{{eventToPublishCode}}/publish",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "events",
+                "{{eventToPublishCode}}",
+                "publish"
+              ]
+            },
+            "description": "ID: E2E-EVT-04\nObjetivo: Publicar evento ADMIN\nActor: admin\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nSolo DRAFT futuro. Repetir GET posterior y cartelera para confirmar PUBLISHED.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E2E-EVT-05 | Asociar artista ADMIN",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/events/{{eventToPublishCode}}/artists/{{artistId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "events",
+                "{{eventToPublishCode}}",
+                "artists",
+                "{{artistId}}"
+              ]
+            },
+            "description": "ID: E2E-EVT-05\nObjetivo: Asociar artista ADMIN\nActor: admin\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nEjecutar antes de publicar si se sigue Flujo C. GET posterior muestra artista. Una repeticion debe dar 409.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E2E-EVT-06 | Eventos por artista como visitante",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/events/by-artist?stageName={{artistStageName}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "events",
+                "by-artist"
+              ],
+              "query": [
+                {
+                  "key": "stageName",
+                  "value": "{{artistStageName}}"
+                }
+              ]
+            },
+            "description": "ID: E2E-EVT-06\nObjetivo: Eventos por artista como visitante\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nTodos deben estar PUBLISHED. Nunca incluye el borrador de fixtures.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "06 Tickets / compra, consulta y ciclo de vida (6 rutas)",
+      "item": [
+        {
+          "name": "E2E-TKT-01 | Comprar ticket cancelable de A",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tickets"
+              ]
+            },
+            "description": "ID: E2E-TKT-01\nObjetivo: Comprar ticket cancelable de A\nActor: userA\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 201\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nCopiar ticketCode a ticketCancelableCode. userEmail debe ser A, eventCode el publicado; PAID. El precio VIP vigente es 200.00 COP, heredado de la politica de servicios (no 250000).\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userAToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userEmail\": \"{{userAEmail}}\",\n  \"eventCode\": \"{{publishedEventCode}}\",\n  \"type\": \"VIP\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E2E-TKT-02 | Consultar ticket propio",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets/{{ticketCancelableCode}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tickets",
+                "{{ticketCancelableCode}}"
+              ]
+            },
+            "description": "ID: E2E-TKT-02\nObjetivo: Consultar ticket propio\nActor: userA\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userAToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E2E-TKT-03 | Listar tickets propios",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets/by-user?email={{userAEmail}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tickets",
+                "by-user"
+              ],
+              "query": [
+                {
+                  "key": "email",
+                  "value": "{{userAEmail}}"
+                }
+              ]
+            },
+            "description": "ID: E2E-TKT-03\nObjetivo: Listar tickets propios\nActor: userA\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userAToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E2E-TKT-04 | Listar tickets pagados STAFF",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/events/{{publishedEventCode}}/tickets/paid",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "events",
+                "{{publishedEventCode}}",
+                "tickets",
+                "paid"
+              ]
+            },
+            "description": "ID: E2E-TKT-04\nObjetivo: Listar tickets pagados STAFF\nActor: staff\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nSolo PAID. Comprobar ausencia de tickets cancelados/usados despues de sus transiciones.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{staffToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E2E-TKT-05 | Cancelar ticket propio",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets/{{ticketCancelableCode}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tickets",
+                "{{ticketCancelableCode}}",
+                "cancel"
+              ]
+            },
+            "description": "ID: E2E-TKT-05\nObjetivo: Cancelar ticket propio\nActor: userA\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nEjecutar IDOR antes de este paso. Estado PAID previo y CANCELLED posterior mediante GET.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userAToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "E2E-TKT-06 | Registrar ingreso con STAFF",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets/{{ticketUsableCode}}/use",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tickets",
+                "{{ticketUsableCode}}",
+                "use"
+              ]
+            },
+            "description": "ID: E2E-TKT-06\nObjetivo: Registrar ingreso con STAFF\nActor: staff\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nCrear primero ticket independiente mediante FLUJO-01. PAID previo, USED posterior; confirmar por GET.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{staffToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "07 Seguridad / escenarios negativos",
+      "item": [
+        {
+          "name": "TC-AUTH-004 | Password incorrecto",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "ID: TC-AUTH-004\nObjetivo: Password incorrecto\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 401\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nMensaje Credenciales invalidas; comparar con usuario inexistente.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifier\": \"{{userAUsername}}\",\n  \"password\": \"IncorrectaSoloPruebas!\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-AUTH-005 | Identificador inexistente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "ID: TC-AUTH-005\nObjetivo: Identificador inexistente\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 401\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifier\": \"no-existe-{{runId}}\",\n  \"password\": \"IncorrectaSoloPruebas!\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-AUTH-007 | Ruta protegida sin Bearer",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "me"
+              ]
+            },
+            "description": "ID: TC-AUTH-007\nObjetivo: Ruta protegida sin Bearer\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 401\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-AUTH-008 | Bearer malformado",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "me"
+              ]
+            },
+            "description": "ID: TC-AUTH-008\nObjetivo: Bearer malformado\nActor: malformed\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 401\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nPreparar variable malformedToken localmente. No generar tokens ni guardar secretos en Postman. Para expiracion, esperar el TTL configurado o usar TTL corto en un arranque E2E controlado.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{malformedToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-AUTH-009 | JWT alterado",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "me"
+              ]
+            },
+            "description": "ID: TC-AUTH-009\nObjetivo: JWT alterado\nActor: tampered\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 401\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nPreparar variable tamperedToken localmente. No generar tokens ni guardar secretos en Postman. Para expiracion, esperar el TTL configurado o usar TTL corto en un arranque E2E controlado.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{tamperedToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-AUTH-010 | JWT expirado",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "me"
+              ]
+            },
+            "description": "ID: TC-AUTH-010\nObjetivo: JWT expirado\nActor: expired\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 401\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nPreparar variable expiredToken localmente. No generar tokens ni guardar secretos en Postman. Para expiracion, esperar el TTL configurado o usar TTL corto en un arranque E2E controlado.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{expiredToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-AUTH-011-key | JWT de otra clave",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "me"
+              ]
+            },
+            "description": "ID: TC-AUTH-011-key\nObjetivo: JWT de otra clave\nActor: wrongKey\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 401\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nPreparar variable wrongKeyToken localmente. No generar tokens ni guardar secretos en Postman. Para expiracion, esperar el TTL configurado o usar TTL corto en un arranque E2E controlado.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{wrongKeyToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-AUTH-011-issuer | JWT de otro emisor",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "me"
+              ]
+            },
+            "description": "ID: TC-AUTH-011-issuer\nObjetivo: JWT de otro emisor\nActor: wrongIssuer\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 401\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nPreparar variable wrongIssuerToken localmente. No generar tokens ni guardar secretos en Postman. Para expiracion, esperar el TTL configurado o usar TTL corto en un arranque E2E controlado.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{wrongIssuerToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-AUTH-012 | Token por query no autentica",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/me?access_token={{userAToken}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "me"
+              ],
+              "query": [
+                {
+                  "key": "access_token",
+                  "value": "{{userAToken}}"
+                }
+              ]
+            },
+            "description": "ID: TC-AUTH-012\nObjetivo: Token por query no autentica\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 401\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nSolo la cabecera Bearer autentica. Caso negativo deliberado: no copiar URL a capturas ni reportes.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-AUTH-013 | Token de usuario desactivado",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/me",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "me"
+              ]
+            },
+            "description": "ID: TC-AUTH-013\nObjetivo: Token de usuario desactivado\nActor: inactive\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 401\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nEn la BD E2E, activar temporalmente e2e-inactive, hacer login y copiar inactiveToken; desactivar de nuevo antes de Send. Ver fixtures/README.md.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{inactiveToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-AUTH-015 | Bearer invalido en ruta publica se rechaza",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/venues/active",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "venues",
+                "active"
+              ]
+            },
+            "description": "ID: TC-AUTH-015\nObjetivo: Bearer invalido en ruta publica se rechaza\nActor: malformed\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 401\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{malformedToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-SEC-001-None | Crear evento sin permiso None",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/events",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "events"
+              ]
+            },
+            "description": "ID: TC-SEC-001-None\nObjetivo: Crear evento sin permiso None\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 401\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nReconsultar con ADMIN y confirmar que no se creo el evento. Usar un codigo nuevo exclusivo del caso.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventCode\": \"{{newEventCode}}\",\n  \"name\": \"PulsePass E2E {{runId}}\",\n  \"description\": \"Evento de prueba manual\",\n  \"category\": \"MUSIC\",\n  \"eventDate\": \"{{futureEventDate}}\",\n  \"minimumAge\": 0,\n  \"venueCode\": \"{{venueActiveCode}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-SEC-001-userA | Crear evento sin permiso userA",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/events",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "events"
+              ]
+            },
+            "description": "ID: TC-SEC-001-userA\nObjetivo: Crear evento sin permiso userA\nActor: userA\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 403\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nReconsultar con ADMIN y confirmar que no se creo el evento. Usar un codigo nuevo exclusivo del caso.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userAToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventCode\": \"{{newEventCode}}\",\n  \"name\": \"PulsePass E2E {{runId}}\",\n  \"description\": \"Evento de prueba manual\",\n  \"category\": \"MUSIC\",\n  \"eventDate\": \"{{futureEventDate}}\",\n  \"minimumAge\": 0,\n  \"venueCode\": \"{{venueActiveCode}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-SEC-001-staff | Crear evento sin permiso staff",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/events",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "events"
+              ]
+            },
+            "description": "ID: TC-SEC-001-staff\nObjetivo: Crear evento sin permiso staff\nActor: staff\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 403\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nReconsultar con ADMIN y confirmar que no se creo el evento. Usar un codigo nuevo exclusivo del caso.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{staffToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventCode\": \"{{newEventCode}}\",\n  \"name\": \"PulsePass E2E {{runId}}\",\n  \"description\": \"Evento de prueba manual\",\n  \"category\": \"MUSIC\",\n  \"eventDate\": \"{{futureEventDate}}\",\n  \"minimumAge\": 0,\n  \"venueCode\": \"{{venueActiveCode}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-SEC-002-userA | Publicar sin rol ADMIN",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/events/{{draftEventCode}}/publish",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "events",
+                "{{draftEventCode}}",
+                "publish"
+              ]
+            },
+            "description": "ID: TC-SEC-002-userA\nObjetivo: Publicar sin rol ADMIN\nActor: userA\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 403\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nGET con ADMIN despues confirma DRAFT sin mutacion.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userAToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-SEC-002-staff | Publicar sin rol ADMIN",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/events/{{draftEventCode}}/publish",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "events",
+                "{{draftEventCode}}",
+                "publish"
+              ]
+            },
+            "description": "ID: TC-SEC-002-staff\nObjetivo: Publicar sin rol ADMIN\nActor: staff\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 403\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nGET con ADMIN despues confirma DRAFT sin mutacion.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{staffToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-SEC-003 | Asociar artista como USER",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/events/{{draftEventCode}}/artists/{{artistId}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "events",
+                "{{draftEventCode}}",
+                "artists",
+                "{{artistId}}"
+              ]
+            },
+            "description": "ID: TC-SEC-003\nObjetivo: Asociar artista como USER\nActor: userA\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 403\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nGET ADMIN posterior: artistas sin cambios.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userAToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-SEC-004 | Borrador oculto a visitante",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/events/{{draftEventCode}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "events",
+                "{{draftEventCode}}"
+              ]
+            },
+            "description": "ID: TC-SEC-004\nObjetivo: Borrador oculto a visitante\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 404\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-SEC-004-user | Borrador oculto a USER",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/events/{{draftEventCode}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "events",
+                "{{draftEventCode}}"
+              ]
+            },
+            "description": "ID: TC-SEC-004-user\nObjetivo: Borrador oculto a USER\nActor: userA\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 404\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userAToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-SEC-005 | Busqueda publica no filtra borradores al cliente",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/events/by-artist?stageName={{artistStageName}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "events",
+                "by-artist"
+              ],
+              "query": [
+                {
+                  "key": "stageName",
+                  "value": "{{artistStageName}}"
+                }
+              ]
+            },
+            "description": "ID: TC-SEC-005\nObjetivo: Busqueda publica no filtra borradores al cliente\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nLa lista excluye draftEventCode; comprobar contra GET ADMIN del borrador.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-SEC-006 | Consultar email ajeno",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/by-email?email={{userAEmail}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "by-email"
+              ],
+              "query": [
+                {
+                  "key": "email",
+                  "value": "{{userAEmail}}"
+                }
+              ]
+            },
+            "description": "ID: TC-SEC-006\nObjetivo: Consultar email ajeno\nActor: userB\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 403\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nPolitica fija: 403 para recurso existente ajeno; no aceptar 404 como equivalente.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userBToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-SEC-007 | Consultar username ajeno",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/by-username?username={{userAUsername}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "by-username"
+              ],
+              "query": [
+                {
+                  "key": "username",
+                  "value": "{{userAUsername}}"
+                }
+              ]
+            },
+            "description": "ID: TC-SEC-007\nObjetivo: Consultar username ajeno\nActor: userB\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 403\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nPolitica fija: 403 para recurso existente ajeno; no aceptar 404 como equivalente.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userBToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-SEC-009 | Leer ticket ajeno",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets/{{ticketCancelableCode}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tickets",
+                "{{ticketCancelableCode}}"
+              ]
+            },
+            "description": "ID: TC-SEC-009\nObjetivo: Leer ticket ajeno\nActor: userB\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 403\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nPolitica fija: 403 para recurso existente ajeno; no aceptar 404 como equivalente.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userBToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-SEC-010 | Listar tickets ajenos",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets/by-user?email={{userAEmail}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tickets",
+                "by-user"
+              ],
+              "query": [
+                {
+                  "key": "email",
+                  "value": "{{userAEmail}}"
+                }
+              ]
+            },
+            "description": "ID: TC-SEC-010\nObjetivo: Listar tickets ajenos\nActor: userB\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 403\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nPolitica fija: 403 para recurso existente ajeno; no aceptar 404 como equivalente.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userBToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-SEC-008 | Compra con identidad ajena",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tickets"
+              ]
+            },
+            "description": "ID: TC-SEC-008\nObjetivo: Compra con identidad ajena\nActor: userA\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 403\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nComparar listado de tickets de B antes y despues con su token: no se creo ticket.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userAToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userEmail\": \"{{userBEmail}}\",\n  \"eventCode\": \"{{publishedEventCode}}\",\n  \"type\": \"VIP\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-SEC-011 | Cancelar ticket ajeno",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets/{{ticketCancelableCode}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tickets",
+                "{{ticketCancelableCode}}",
+                "cancel"
+              ]
+            },
+            "description": "ID: TC-SEC-011\nObjetivo: Cancelar ticket ajeno\nActor: userB\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 403\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nEjecutar antes de cancelar como A. GET posterior como A debe mantener PAID.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userBToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-SEC-012 | USER no puede registrar uso",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets/{{ticketUsableCode}}/use",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tickets",
+                "{{ticketUsableCode}}",
+                "use"
+              ]
+            },
+            "description": "ID: TC-SEC-012\nObjetivo: USER no puede registrar uso\nActor: userA\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 403\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nGET propio posterior mantiene PAID.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userAToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-SEC-013 | USER no puede listar pagados de evento",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/events/{{publishedEventCode}}/tickets/paid",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "events",
+                "{{publishedEventCode}}",
+                "tickets",
+                "paid"
+              ]
+            },
+            "description": "ID: TC-SEC-013\nObjetivo: USER no puede listar pagados de evento\nActor: userA\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 403\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userAToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-SEC-015 | ADMIN consulta borrador",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/events/{{draftEventCode}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "events",
+                "{{draftEventCode}}"
+              ]
+            },
+            "description": "ID: TC-SEC-015\nObjetivo: ADMIN consulta borrador\nActor: admin\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-SEC-016 | Registro no concede rol inyectado",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users"
+              ]
+            },
+            "description": "ID: TC-SEC-016\nObjetivo: Registro no concede rol inyectado\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 201\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nHacer login con esta nueva identidad y userBPassword; /me debe mostrar solo USER. No reemplazar userBToken durante pruebas IDOR.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"escalation-{{runId}}\",\n  \"email\": \"escalation-{{runId}}@pulsepass.test\",\n  \"firstName\": \"Carlos\",\n  \"lastName\": \"Pruebas\",\n  \"birthDate\": \"1998-05-15\",\n  \"password\": \"{{userBPassword}}\",\n  \"role\": \"ADMIN\",\n  \"roles\": [\n    \"ADMIN\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-SEC-017 | Revocacion de STAFF con JWT previo",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets/{{ticketUsableCode}}/use",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tickets",
+                "{{ticketUsableCode}}",
+                "use"
+              ]
+            },
+            "description": "ID: TC-SEC-017\nObjetivo: Revocacion de STAFF con JWT previo\nActor: staff\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 403\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nRetirar rol STAFF en BD E2E sin cambiar token; Send y GET posterior sin mutacion. Restaurar rol al terminar. Ver fixtures/README.md.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{staffToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-SEC-ADMIN-OWN | ADMIN autorizado consulta usuario de soporte",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users/by-email?email={{userAEmail}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users",
+                "by-email"
+              ],
+              "query": [
+                {
+                  "key": "email",
+                  "value": "{{userAEmail}}"
+                }
+              ]
+            },
+            "description": "ID: TC-SEC-ADMIN-OWN\nObjetivo: ADMIN autorizado consulta usuario de soporte\nActor: admin\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "08 Validaciones y errores HTTP",
+      "item": [
+        {
+          "name": "VAL-001 | Evento sin campos obligatorios",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/events",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "events"
+              ]
+            },
+            "description": "ID: VAL-001\nObjetivo: Evento sin campos obligatorios\nActor: admin\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 400\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "VAL-002 | Email invalido",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users"
+              ]
+            },
+            "description": "ID: VAL-002\nObjetivo: Email invalido\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 400\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{userAUsername}}\",\n  \"email\": \"invalido\",\n  \"firstName\": \"Andrea\",\n  \"lastName\": \"Pruebas\",\n  \"birthDate\": \"1998-05-15\",\n  \"password\": \"{{userAPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "VAL-003 | Password corto",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users"
+              ]
+            },
+            "description": "ID: VAL-003\nObjetivo: Password corto\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 400\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{userAUsername}}\",\n  \"email\": \"{{userAEmail}}\",\n  \"firstName\": \"Andrea\",\n  \"lastName\": \"Pruebas\",\n  \"birthDate\": \"1998-05-15\",\n  \"password\": \"corto\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "VAL-004 | JSON mal formado",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/events",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "events"
+              ]
+            },
+            "description": "ID: VAL-004\nObjetivo: JSON mal formado\nActor: admin\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 400\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\"eventCode\":",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "VAL-005 | Categoria desconocida",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/events",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "events"
+              ]
+            },
+            "description": "ID: VAL-005\nObjetivo: Categoria desconocida\nActor: admin\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 400\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventCode\": \"{{newEventCode}}\",\n  \"name\": \"PulsePass E2E {{runId}}\",\n  \"description\": \"Evento de prueba manual\",\n  \"category\": \"INVALID\",\n  \"eventDate\": \"{{futureEventDate}}\",\n  \"minimumAge\": 0,\n  \"venueCode\": \"{{venueActiveCode}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "VAL-006 | Tipo de ticket desconocido",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tickets"
+              ]
+            },
+            "description": "ID: VAL-006\nObjetivo: Tipo de ticket desconocido\nActor: userA\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 400\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userAToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userEmail\": \"{{userAEmail}}\",\n  \"eventCode\": \"{{publishedEventCode}}\",\n  \"type\": \"INVALID\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "VAL-007 | Edad minima negativa",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/events",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "events"
+              ]
+            },
+            "description": "ID: VAL-007\nObjetivo: Edad minima negativa\nActor: admin\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 400\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventCode\": \"{{newEventCode}}\",\n  \"name\": \"PulsePass E2E {{runId}}\",\n  \"description\": \"Evento de prueba manual\",\n  \"category\": \"MUSIC\",\n  \"eventDate\": \"{{futureEventDate}}\",\n  \"minimumAge\": -1,\n  \"venueCode\": \"{{venueActiveCode}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "VAL-008 | Artista ID no numerico",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/artists/no-numerico",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "artists",
+                "no-numerico"
+              ]
+            },
+            "description": "ID: VAL-008\nObjetivo: Artista ID no numerico\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 400\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "VAL-009 | Parametro obligatorio ausente",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/artists/by-stage-name",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "artists",
+                "by-stage-name"
+              ]
+            },
+            "description": "ID: VAL-009\nObjetivo: Parametro obligatorio ausente\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 400\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "VAL-010 | Evento inexistente",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/events/E2E-NOT-FOUND",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "events",
+                "E2E-NOT-FOUND"
+              ]
+            },
+            "description": "ID: VAL-010\nObjetivo: Evento inexistente\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 404\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "VAL-011 | Sede inexistente",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/venues/E2E-NOT-FOUND",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "venues",
+                "E2E-NOT-FOUND"
+              ]
+            },
+            "description": "ID: VAL-011\nObjetivo: Sede inexistente\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 404\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "VAL-012 | Artista inexistente",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/artists/9223372036854775807",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "artists",
+                "9223372036854775807"
+              ]
+            },
+            "description": "ID: VAL-012\nObjetivo: Artista inexistente\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 404\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "VAL-013 | Usuario duplicado",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users"
+              ]
+            },
+            "description": "ID: VAL-013\nObjetivo: Usuario duplicado\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 409\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"{{userAUsername}}\",\n  \"email\": \"{{userAEmail}}\",\n  \"firstName\": \"Andrea\",\n  \"lastName\": \"Pruebas\",\n  \"birthDate\": \"1998-05-15\",\n  \"password\": \"{{userAPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "VAL-014 | Evento duplicado",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/events",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "events"
+              ]
+            },
+            "description": "ID: VAL-014\nObjetivo: Evento duplicado\nActor: admin\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 409\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventCode\": \"{{newEventCode}}\",\n  \"name\": \"PulsePass E2E {{runId}}\",\n  \"description\": \"Evento de prueba manual\",\n  \"category\": \"MUSIC\",\n  \"eventDate\": \"{{futureEventDate}}\",\n  \"minimumAge\": 0,\n  \"venueCode\": \"{{venueActiveCode}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "VAL-015 | Fecha pasada",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/events",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "events"
+              ]
+            },
+            "description": "ID: VAL-015\nObjetivo: Fecha pasada\nActor: admin\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 409\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventCode\": \"PAST-{{runId}}\",\n  \"name\": \"PulsePass E2E {{runId}}\",\n  \"description\": \"Evento de prueba manual\",\n  \"category\": \"MUSIC\",\n  \"eventDate\": \"2000-01-01T20:00:00\",\n  \"minimumAge\": 0,\n  \"venueCode\": \"{{venueActiveCode}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "VAL-016 | Sede inactiva",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/events",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "events"
+              ]
+            },
+            "description": "ID: VAL-016\nObjetivo: Sede inactiva\nActor: admin\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 409\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"eventCode\": \"INACTIVE-{{runId}}\",\n  \"name\": \"PulsePass E2E {{runId}}\",\n  \"description\": \"Evento de prueba manual\",\n  \"category\": \"MUSIC\",\n  \"eventDate\": \"{{futureEventDate}}\",\n  \"minimumAge\": 0,\n  \"venueCode\": \"{{venueInactiveCode}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "VAL-017 | Nacimiento futuro",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users"
+              ]
+            },
+            "description": "ID: VAL-017\nObjetivo: Nacimiento futuro\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 409\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"future-{{runId}}\",\n  \"email\": \"future-{{runId}}@pulsepass.test\",\n  \"firstName\": \"Andrea\",\n  \"lastName\": \"Pruebas\",\n  \"birthDate\": \"2099-01-01\",\n  \"password\": \"{{userAPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "09 Flujos de negocio / secuencia recomendada",
+      "item": [
+        {
+          "name": "FLUJO-01 | Comprar ticket independiente para uso",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tickets"
+              ]
+            },
+            "description": "ID: FLUJO-01\nObjetivo: Comprar ticket independiente para uso\nActor: userA\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 201\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nCopiar ticketCode a ticketUsableCode. Mantener ticketCancelableCode diferente. Hacer IDOR antes de cancelar/usar.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userAToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userEmail\": \"{{userAEmail}}\",\n  \"eventCode\": \"{{publishedEventCode}}\",\n  \"type\": \"GENERAL\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-BIZ-010-check | Confirmar cancelacion persistida",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets/{{ticketCancelableCode}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tickets",
+                "{{ticketCancelableCode}}"
+              ]
+            },
+            "description": "ID: TC-BIZ-010-check\nObjetivo: Confirmar cancelacion persistida\nActor: userA\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nTras E2E-TKT-05 debe estar CANCELLED.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userAToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-BIZ-011 | Repetir cancelacion",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets/{{ticketCancelableCode}}/cancel",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tickets",
+                "{{ticketCancelableCode}}",
+                "cancel"
+              ]
+            },
+            "description": "ID: TC-BIZ-011\nObjetivo: Repetir cancelacion\nActor: userA\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 409\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nEl estado sigue CANCELLED mediante GET posterior.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userAToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-BIZ-012-check | Confirmar uso persistido",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets/{{ticketUsableCode}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tickets",
+                "{{ticketUsableCode}}"
+              ]
+            },
+            "description": "ID: TC-BIZ-012-check\nObjetivo: Confirmar uso persistido\nActor: userA\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nTras E2E-TKT-06 debe estar USED.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userAToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-BIZ-013 | Repetir uso",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets/{{ticketUsableCode}}/use",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tickets",
+                "{{ticketUsableCode}}",
+                "use"
+              ]
+            },
+            "description": "ID: TC-BIZ-013\nObjetivo: Repetir uso\nActor: staff\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 409\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nEl estado sigue USED mediante GET posterior.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{staffToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-BIZ-014-draft | No comprar borrador",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tickets"
+              ]
+            },
+            "description": "ID: TC-BIZ-014-draft\nObjetivo: No comprar borrador\nActor: userA\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 409\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userAToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userEmail\": \"{{userAEmail}}\",\n  \"eventCode\": \"{{draftEventCode}}\",\n  \"type\": \"VIP\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-BIZ-014-soldout | No comprar evento agotado",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tickets"
+              ]
+            },
+            "description": "ID: TC-BIZ-014-soldout\nObjetivo: No comprar evento agotado\nActor: userA\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 409\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userAToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userEmail\": \"{{userAEmail}}\",\n  \"eventCode\": \"{{soldOutEventCode}}\",\n  \"type\": \"VIP\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "FLUJO-MINOR-01 | Registrar persona menor de edad",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/users",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "users"
+              ]
+            },
+            "description": "ID: FLUJO-MINOR-01\nObjetivo: Registrar persona menor de edad\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 201\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nElegir birthDate de modo que siga teniendo menos de 18 a la fecha de CMF-2026.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"minor-{{runId}}\",\n  \"email\": \"minor-{{runId}}@pulsepass.test\",\n  \"firstName\": \"Laura\",\n  \"lastName\": \"Pruebas\",\n  \"birthDate\": \"{{minorBirthDate}}\",\n  \"password\": \"{{minorPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "FLUJO-MINOR-02 | Login persona menor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "ID: FLUJO-MINOR-02\nObjetivo: Login persona menor\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nCopiar manualmente accessToken a minorToken.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifier\": \"minor-{{runId}}\",\n  \"password\": \"{{minorPassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "TC-BIZ-014-age | Rechazo por edad minima",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tickets"
+              ]
+            },
+            "description": "ID: TC-BIZ-014-age\nObjetivo: Rechazo por edad minima\nActor: minor\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 409\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nVerificar CMF-2026 PUBLISHED con capacidad disponible antes de enviar; no debe crearse ticket.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{minorToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userEmail\": \"minor-{{runId}}@pulsepass.test\",\n  \"eventCode\": \"{{ageEventCode}}\",\n  \"type\": \"GENERAL\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "FLUJO-CAP-01 | Comprar hasta completar aforo 3",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/tickets",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "tickets"
+              ]
+            },
+            "description": "ID: FLUJO-CAP-01\nObjetivo: Comprar hasta completar aforo 3\nActor: userA\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 201\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nRepetir individualmente hasta tres tickets PAID contando compras anteriores; al completar, GET ADMIN confirma SOLD_OUT. No usar Runner.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{userAToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userEmail\": \"{{userAEmail}}\",\n  \"eventCode\": \"{{ageEventCode}}\",\n  \"type\": \"VIP\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "FLUJO-CAP-02 | Verificar evento tras completar capacidad",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/events/{{ageEventCode}}",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "events",
+                "{{ageEventCode}}"
+              ]
+            },
+            "description": "ID: FLUJO-CAP-02\nObjetivo: Verificar evento tras completar capacidad\nActor: admin\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 200\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\nSolo tras agotar aforo: SOLD_OUT. Publicamente el acceso por codigo retorna 404 para estados distintos de PUBLISHED.\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{adminToken}}",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "FLUJO-INACTIVE-LOGIN | Login de fixture inactivo se rechaza",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "ID: FLUJO-INACTIVE-LOGIN\nObjetivo: Login de fixture inactivo se rechaza\nActor: anonimo\nPrecondiciones: API y fixtures E2E disponibles; ambiente local seleccionado. Para rutas protegidas, token vigente del actor.\nEjecucion: abrir esta solicitud y pulsar Send individualmente.\nHTTP esperado: 401\nRevision manual: Status exacto; Content-Type application/json; DTO de respuesta o ErrorResponse (timestamp, status igual al HTTP, error, message, details), sin secretos.\n\nEvidencia: completar registro-ejecucion-manual.md. No ejecutar con Runner ni agregar scripts.",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"identifier\": \"{{inactiveIdentifier}}\",\n  \"password\": \"{{inactivePassword}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
